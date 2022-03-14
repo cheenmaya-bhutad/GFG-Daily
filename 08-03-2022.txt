@@ -1,0 +1,47 @@
+Problem - 
+
+You are given a string S, the task is to reverse the string using stack.
+
+Example 1:
+Input: S="GeeksforGeeks"
+Output: skeeGrofskeeG
+ 
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function reverse() which takes the string S as an input parameter and returns the reversed string.
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(N)
+
+Constraints:
+1 ≤ length of the string ≤ 100
+
+
+Solution -
+
+import java.util.*;
+import java.io.*;
+
+public class Problem {
+    public static void main(String[] args) throws IOException {
+        //BufferedReader object to take input
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        //Store the test cases
+        int t = Integer.parseInt(br.readLine().trim());
+        while(t-- > 0) {
+            //Store the user input
+            String str = br.readLine().trim();
+            Solution sol = new Solution();
+            String s = sol.reverse(str);
+            System.out.println(s);
+        }
+        br.close();
+    }
+}
+
+class Solution {
+    public String reverse(String str) {
+        StringBuilder sb = new StringBuilder(str);
+        sb.reverse();
+        return sb.toString();
+    }
+}

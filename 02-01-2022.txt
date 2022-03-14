@@ -1,0 +1,72 @@
+Problem - 
+
+Given two positive integers N and K. You have to find the Kth smallest factor of N. A factor of N is a positive integer which divides N. Output the Kth smallest factor of N if it exists otherwise print -1.
+
+Example 1:
+
+Input : N = 4 , K = 2
+Output: 2
+Explanation:
+All factors of 4 are 1,2 and 4. Out of
+these 2 is the 2nd smallest.
+Example 2:
+
+Input : N = 4 , K = 3
+Output: 4
+Explanation:
+All factors of 4 are 1,2 and 4. Out of
+these 4 is the 3rd smallest.
+ 
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function kThSmallestFactor() which takes 2 Integers N and K as input and returns the answer.
+
+Expected Time Complexity: O(sqrt(N))
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 <= N <= 10^6
+1 <= K <= 10^6
+
+Solution - 
+
+import java.util.*;
+
+public class Problem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0) {
+            int N = sc.nextInt();
+            int k = sc.nextInt();
+            Solution.factors(N);
+            int res = Solution.smallestFactor(N,k);
+            System.out.println(res);
+        }
+    }
+}
+
+class Solution {
+    static int smallestFactor(int N,int k) {
+        int temp = 0;
+        for(int i=1;i<=N;i++) {
+            if(N%i == 0 && k!=0) {
+                temp = i;
+                k--;
+            }      
+        }
+        //This check if for the case when k is larger than factors in total (8 has factors 1,2,4,8 and if K=5 then we must return -1)
+        if(k != 0)
+            return -1;
+        return temp;
+    }
+    
+    //Added to check the actual factors and its order and verify if the kth factor matches.
+    static void factors(int N) {
+        for(int i=1;i<=N;i++) {
+            if(N%i == 0)
+                System.out.print(i + " ");
+        }
+        System.out.print("\n");
+    }
+}

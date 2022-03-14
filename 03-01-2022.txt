@@ -1,0 +1,67 @@
+Problem - 
+Given a square matrix[][] of size N x N. The task is to rotate it by 90 degrees in an anti-clockwise direction without using any extra space.
+
+Example 1:
+
+Input:
+N = 3
+matrix[][] = [[1 2 3],
+              [4 5 6],
+              [7 8 9]]
+Output:
+3 6 9 
+2 5 8 
+1 4 7
+Your Task:
+You only need to implement the given function rotate(). Do not read input, instead use the arguments given in the function. 
+
+Expected Time Complexity: O(N*N)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 ≤ N ≤ 50
+1 <= matrix[][] <= 100
+
+Solution -
+import java.util.*;
+
+public class Problem {
+    public static void main(String[] args) {
+        //Scanner to take input
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0) {
+            int n = sc.nextInt();
+            int[][] matrix = new int[n][n];
+            for(int i = 0;i<n;i++) {
+                for(int j = 0;j<n; j++) {
+                    matrix[i][j] = sc.nextInt();
+                }
+            }
+            Solution.rotate(matrix, n);
+        }
+        sc.close();
+    }
+}
+
+class Solution {
+    static void rotate(int[][] matrix, int n) {
+        int[][] rotate = new int[n][n];
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<n;j++) {
+                rotate[i][j] = matrix[i][j];
+            }
+        }
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<n;j++) {
+                matrix[i][j] = rotate[j][n-1-i];
+            }
+        }
+        for(int[] arr : matrix) {
+            for(int i : arr) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }
+    }
+}
