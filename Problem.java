@@ -7,31 +7,24 @@ public class Problem {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(br.readLine().trim());
         while(t-- > 0) {
-            //Take user input
-            String S = br.readLine().trim();
-            String pat = br.readLine().trim();
-            Solution sol = new Solution();
-            ArrayList<Integer> results = sol.search(S,pat);
-            if(results.size() > 0)
-                for(Integer index : results) 
-                    System.out.print(index + " ");
-            else
-                System.out.print(-1);
-            System.out.println();            
+            //Store the user input
+            String[] input = br.readLine().trim().split(" ");
+            int[] A = new int[input.length];
+            for(int i=0;i<A.length;i++) {
+                A[i] = Integer.parseInt(input[i]);
+            }
+            Solution.sortArray(A,A.length);
+            for(int i : A) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
         }
         br.close();
     }
 }
 
 class Solution {
-    ArrayList<Integer> search(String S,String pat) {
-        ArrayList<Integer> indexes = new ArrayList<Integer>();
-        int temp = 0;
-        while(S.substring(temp).contains(pat)) {
-            temp=S.indexOf(pat,temp);
-            temp = temp + 1;
-            indexes.add(temp);
-        }
-        return indexes;
+    static void sortArray(int[] A,int n) {
+        Arrays.sort(A);
     }
 }
