@@ -1,0 +1,94 @@
+Could not solve.
+
+Problem - 
+Given a set of positive integers, find all its subsets.
+
+Example 1 :
+
+Input : 
+array = {1, 2, 3}
+Output :
+// this space denotes null element. 
+1
+1 2
+1 2 3
+1 3
+2
+2 3
+3
+Explanation: 
+The following are the subsets 
+of the array {1, 2, 3}.
+Example 2 :
+
+Input :
+array = {1, 2}
+Output :
+
+1 
+1 2
+2
+Explanation :
+The following are the 
+subsets of {1, 2}.
+Your task :
+You don't have to read input or print anything. Your task is to complete the function subsets() which takes the array of integers as input and returns the list of list containing the subsets of the given set of numbers in lexicographical order.
+ 
+Expected Time Complexity : O(2^n)))
+Expected Auxiliary Space : O(2^n*length of each subset)
+ 
+Constraints :
+1 <= n <= 20
+1 <= arr[i] <=10
+
+Solution -
+
+import java.util.*;
+import java.io.*;
+
+public class Problem {
+    public static void main(String[] args) throws IOException {
+        //BufferedReader to take input
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine().trim());
+        while(t-- > 0) {
+            //Store the user input. The input should be unique characters or integers.
+            String[] input = br.readLine().trim().split(" ");
+            int[] A = new int[input.length];
+            for(int i=0;i<A.length;i++) {
+                A[i] = Integer.parseInt(input[i]);
+            }
+            Solution.printSubsets(A,A.length);
+        }
+        br.close();
+    }
+}
+
+class Solution {
+    static void printSubsets(int[] A,int n) {
+        // first calculate the total subsets for the array formula is 2 raise to length of array.
+        long total = (long)Math.pow(2,n);
+        // Set  = [a,b,c]
+        // power_set_size = pow(2, 3) = 8
+        // Run for binary counter = 000 to 111
+        // Value of Counter            Subset
+        //     000                    -> Empty set
+        //     001                    -> a
+        //     010                    -> b
+        //     011                    -> ab
+        //     100                    -> c
+        //     101                    -> ac
+        //     110                    -> bc
+        //     111                    -> abc
+        // To implement above logic we use this (counter & (1 << j))
+        int counter,j;
+        
+        for(counter = 0;counter < total;counter++) {
+            for(j = 0;j < n;j++) {
+                if((counter & (1<<j)) > 0) 
+                    System.out.print(A[j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
